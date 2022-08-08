@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+<div class="container ">
+    <div class="row mt-5">
+        <div class="col mt-5">
+            <form [formGroup]="formularioProducto" (ngSubmit)="guardar()">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Código</span>
+                    <input formControlName="codigo" type="text" class="form-control" placeholder="Código"
+                        aria-label="codigo" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="formularioProducto.get('codigo')?.invalid && (formularioProducto.get('codigo')?.dirty)">
+                    <p class="text-danger">El código es requerido</p>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Nombre</span>
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre"
+                        aria-label="Nombre" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="formularioProducto.get('nombre')?.invalid && (formularioProducto.get('nombre')?.dirty)">
+                    <p class="text-danger">El nombre es requerido</p>
+                </div>
+                <div class="mb-3">
+                    <h4>Rubros</h4>
+                    <select (change)="onSelect($any($event.target).value)" formControlName="rubro" class="form-select" type="number" aria-label="Default select example"> <!--[(ngModel)]="selectedRubro.id"-->
+                        <option *ngFor="let rubro of rubros" value="{{rubro.id}}">
+                            {{rubro.nombre}}
+                        </option>
+                    </select>
+                    <div *ngIf="formularioProducto.get('rubro')?.invalid && (formularioProducto.get('rubro')?.dirty)">
+                        <p class="text-danger">El rubro es requerido</p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h4>Subrubros</h4>
+                    <select formControlName="subrubro" class="form-select" type="number" aria-label="Default select example">
+                        <option *ngFor="let subrubro of subrubros" value="{{subrubro.id}}">
+                            {{subrubro.nombre}}
+                        </option>
+                    </select>
+                    <div
+                        *ngIf="formularioProducto.get('subrubro')?.invalid && (formularioProducto.get('subrubro')?.dirty)">
+                        <p class="text-danger">El subrubro es requerido</p>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Marca</span>
+                    <input formControlName="marca" type="text" class="form-control" placeholder="Marca"
+                        aria-label="Marca" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="formularioProducto.get('marca')?.invalid && (formularioProducto.get('marca')?.dirty)">
+                    <p class="text-danger">La marca es requerida</p>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Modelo</span>
+                    <input formControlName="modelo" type="text" class="form-control" placeholder="Modelo"
+                        aria-label="Modelo" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="formularioProducto.get('modelo')?.invalid && (formularioProducto.get('modelo')?.dirty)">
+                    <p class="text-danger">EL modelo es requerido</p>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Descripción</span>
+                    <textarea formControlName="descripcion" class="form-control" aria-label="Descripción..."></textarea>
+                </div>
+                <div
+                    *ngIf="formularioProducto.get('descripcion')?.invalid && (formularioProducto.get('descripcion')?.dirty)">
+                    <p class="text-danger">La descripción es requerida</p>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">URL de la imagen</span>
+                    <input formControlName="urlImagen" type="text" class="form-control" id="basic-url"
+                        aria-describedby="basic-addon3">
+                </div>
+                <div
+                    *ngIf="formularioProducto.get('urlImagen')?.invalid && (formularioProducto.get('urlImagen')?.dirty)">
+                    <p class="text-danger">El URL de la imagen es requerido</p>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Precio</span><span class="input-group-text">$</span>
+                    <input formControlName="precio" type="number" class="form-control"
+                        aria-label="Amount (to the nearest dollar)">
+                </div>
+                <div *ngIf="formularioProducto.get('precio')?.invalid && (formularioProducto.get('precio')?.dirty)">
+                    <p class="text-danger">El precio es requerido</p>
+                </div>
+            </form>
+            <div class="d-grid gap-1 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-2" type="button" [disabled]="this.formularioProducto.invalid"
+                    (click)="guardar()">Cargar</button>
+            </div>
+        </div>
+    </div>
+</div>
