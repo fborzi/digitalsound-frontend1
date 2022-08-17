@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Producto } from '../models/producto';
 
 /*Para inyectar un servicio en cualquier componente,
@@ -12,7 +13,7 @@ import { Producto } from '../models/producto';
 export class ProductoService {
 
   /*URL base de servicio a llamar - Direccion de API REST*/
-  private baseUrl = 'http://localhost:8080/productos';
+  productURL = environment.productURL; 
  
   /*Angular tiene un marco de inyección de dependencia, HttpClient es el inyectable */
   constructor(private httpClient: HttpClient) { }
@@ -20,37 +21,37 @@ export class ProductoService {
   /*Método para obtener todos los productos*/
 
   public lista(): Observable<Producto[]>{
-    return this.httpClient.get<Producto[]>(this.baseUrl); //Chequear URL
+    return this.httpClient.get<Producto[]>(this.productURL); //Chequear URL
   }
 
   /*Método para obtener un producto por id*/
 
   public detail(id: number): Observable<Producto>{
-    return this.httpClient.get<Producto>(this.baseUrl + `details/${id}`); //Chequear URL
+    return this.httpClient.get<Producto>(this.productURL + `details/${id}`); //Chequear URL
   }
 
   /*Método para obtener un producto por nombre*/
   
   public detailName(name: string): Observable<Producto>{
-    return this.httpClient.get<Producto>(this.baseUrl + `details-name/${name}`); //Chequear URL
+    return this.httpClient.get<Producto>(this.productURL + `details-name/${name}`); //Chequear URL
   }
 
   /*Método para crear un producto*/
 
   public save(product: Producto): Observable<Producto>{
-    return this.httpClient.post<Producto>(this.baseUrl + '/create', product); //Chequear URL
+    return this.httpClient.post<Producto>(this.productURL + '/create', product); //Chequear URL
   }
 
   /*Método para actualizar un producto*/
 
   public update(id: number, product: Producto): Observable<Producto>{
-    return this.httpClient.put<Producto>(this.baseUrl + `/update/${id}`, product); //Chequear URL
+    return this.httpClient.put<Producto>(this.productURL + `/update/${id}`, product); //Chequear URL
   }
 
   /*Método para eliminar un producto*/
 
   public delete(id: number): Observable<Producto>{ 
-    return this.httpClient.delete<Producto>(this.baseUrl + `/delete/${id}`); //Chequear URL
+    return this.httpClient.delete<Producto>(this.productURL + `/delete/${id}`); //Chequear URL
   }
 
   private productos: Producto[] = [

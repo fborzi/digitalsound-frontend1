@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './services/interceptors/product-interceptor.service';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
@@ -20,18 +23,7 @@ import { NavbarComponent } from './modules/navbar/navbar.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { CommonModule } from '@angular/common';
 
-const routes : Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'productos', component: ProductosComponent },
-  { path: 'quienes', component: QuienesComponent },
-  { path: 'ventamayoristasignup', component: VentaMayoristaSignUpComponent },
-  { path: 'ventamayoristalogin', component: VentaMayoristaLoginComponent },
-  { path: 'contacto', component: ContactoComponent },
-  { path: 'usuario', component: UsuarioComponent },
-  { path: 'administrador', component: AdministradorComponent },
-  { path: 'subrubros', component: SubrubrosComponent },
-  { path: 'ventamayorista', component: VentaMayoristaComponent },
-]
+
 
 @NgModule({
     declarations:[
@@ -53,12 +45,13 @@ const routes : Routes = [
   imports: [
     BrowserModule,
     CommonModule,
+    RouterModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
     HttpClientModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

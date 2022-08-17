@@ -1,10 +1,11 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TokenService } from 'src/app/services/token.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-venta-mayorista-signup',
@@ -14,9 +15,22 @@ import { TokenService } from 'src/app/services/token.service';
 export class VentaMayoristaSignUpComponent implements OnInit {
 
   formularioSignUp!: FormGroup;
-  isLogged: boolean = false;
+  isRegistered: boolean = false;
+  isRegisteredFail: boolean = false;
   nuevoUsuario!: Usuario;
+  
+  // name: String = "";
+  // lastname: String = "";
+  // dni: String = "";
+  // business: String = "";
+  // username: String = "";
+  // password: String = "";
+  //roles: String[] = [];
+
   errorMessage : string = "";
+
+  //newUser: any;
+  
   
 
   constructor(
@@ -28,41 +42,63 @@ export class VentaMayoristaSignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.formularioSignUp = this.formbuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      apellido: ['', [Validators.required, Validators.minLength(3)]],
-      dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(11)]],
-      empresa: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      repeatPassword: ['', [Validators.required, Validators.minLength(6)]]      
+      name: new FormControl ('', [Validators.required, Validators.minLength(3)]),
+      lastName: new FormControl ('', [Validators.required, Validators.minLength(3)]),
+      dni: new FormControl ('', [Validators.required, Validators.minLength(8), Validators.maxLength(11)]),
+      business: new FormControl ('', [Validators.required]),
+      username: new FormControl ('', [Validators.required]),
+      password: new FormControl ('', [Validators.required, Validators.minLength(6)]),
+      //repeatPassword: ['', [Validators.required, Validators.minLength(6)]]      
     })
 
-    if(this.tokenService.getToken()){
-      this.isLogged = true;
-    }
   }
 
-  guardarUsuario(){
-    console.log(this.formularioSignUp.value);
+  onRegister(){
+    var user = new Usuario();
 
-    this.nuevoUsuario = new Usuario(this.formularioSignUp.value.nombre,
-      this.formularioSignUp.value.apellido,
-      this.formularioSignUp.value.dni,
-      this.formularioSignUp.value.empresa,
-      this.formularioSignUp.value.email,
-      this.formularioSignUp.value.password,
-      );
-    this.authService.nuevoUsuario(this.nuevoUsuario).subscribe(
-      data => {
+    user.name = this.formularioSignUp.value.name;
+    user.lastName = this.formularioSignUp.value.lastName;
+    user.dni = this.formularioSignUp.value.dni;
+    user.business = this.formularioSignUp.value.business;
+    user.username = this.formularioSignUp.value.username;
+    user.password = this.formularioSignUp.value.password;
+
+    // const newUser : Usuario =
+    // {
+    //   "username": user.username,
+    //   "name": user.name,
+    //   "lastName": user.lastname,
+    //   "password": "123456",
+    //   "business": "Bridgeston",
+    //   "dni": "44265488"
+    // } 
+
+    this.authService.register(user).subscribe(
+      respuesta => {
+        // this.isRegistered = true;
+        // this.isRegisteredFail = false;
         this.router.navigate(['/ventamayoristalogin']);
-      },
-      error => {
-        this.errorMessage = error.error.message;
-        console.log(error.error.message);
-      }
-    )
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Cuenta creada con éxito',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      },        
+        error => {
+          // this.isRegistered = false;
+          // this.isRegisteredFail = true;
+          // this.errorMessage = error.error.message;
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: error.error.message, //this.errorMessage,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      );
+
   }
-
-
-
 }
