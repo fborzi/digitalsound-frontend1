@@ -70,7 +70,7 @@ export class CategoryComponent implements OnInit {
       (res) => {this.filteredProducts = res;},
       (error: HttpErrorResponse) => {alert(error.message);}
     )
-    this.router.navigate(['/subrubros'])
+    this.router.navigate(['/subcategories'])
     //return this.productos;
   }
 
