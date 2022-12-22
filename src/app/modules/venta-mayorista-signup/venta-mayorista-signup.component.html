@@ -24,13 +24,13 @@
                 <div class="form-floating mb-2">
                     <input
                         type="text"
-                        formControlName="lastName"
+                        formControlName="lastname"
                         class="form-control"
                         placeholder="apellido"
                         required>
                     <label for="floatingInput">Apellido</label>
                 </div>
-                <div *ngIf="formularioSignUp.get('lastName')?.invalid && formularioSignUp.get('lastName')?.dirty">
+                <div *ngIf="formularioSignUp.get('lastname')?.invalid && formularioSignUp.get('lastname')?.dirty">
                     <p class="text-danger">El apellido es requerido</p>
                 </div>
                 <div class="form-floating mb-2">

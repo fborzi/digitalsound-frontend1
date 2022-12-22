@@ -4,8 +4,13 @@
 
 export const environment = {
   production: false,
-  productURL: 'http://localhost:8080/productos',
-  authURL: 'http://localhost:8080/auth'
+  mainURL: 'http://localhost:8080',
+  productURL: '/products',
+  authURL: '/auth',
+  categoryURL: '/categories',
+  subcategoryURL: '/sub-categories',
+  brandURL: '/brands',
+  taxURL: '/taxes'
 
 };
 

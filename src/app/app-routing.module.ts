@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdministradorComponent } from './modules/administrador/administrador.component';
-import { ContactoComponent } from './modules/contacto/contacto.component';
+import { AdminComponent } from './modules/admin/admin.component';
+import { ContactComponent } from './modules/contact/contact.component';
 import { HomeComponent } from './modules/home/home.component';
-import { ProductosComponent } from './modules/productos/productos.component';
-import { QuienesComponent } from './modules/quienes/quienes.component';
-import { SubrubrosComponent } from './modules/subrubros/subrubros.component';
-import { UsuarioComponent } from './modules/usuario/usuario.component';
+import { ProductComponent } from './modules/product/product.component';
+import { AboutusComponent } from './modules/aboutus/aboutus.component';
+import { CategoryComponent } from './modules/category/category.component';
+import { SubcategoryComponent } from './modules/subcategory/subcategory.component';
+import { UserComponent } from './modules/user/user.component';
 import { VentaMayoristaLoginComponent } from './modules/venta-mayorista-login/venta-mayorista-login.component';
 import { VentaMayoristaSignUpComponent } from './modules/venta-mayorista-signup/venta-mayorista-signup.component';
 import { VentaMayoristaComponent } from './modules/venta-mayorista/venta-mayorista.component';
@@ -17,14 +18,15 @@ import { ProductGuardService } from './services/guards/product-guard.service';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'productos', component: ProductosComponent },
-    { path: 'quienes', component: QuienesComponent },
+    { path: 'products', component: ProductComponent },
+    { path: 'aboutus', component: AboutusComponent },
     { path: 'ventamayoristasignup', component: VentaMayoristaSignUpComponent, canActivate: [LoginGuard] },
     { path: 'ventamayoristalogin', component: VentaMayoristaLoginComponent, canActivate: [LoginGuard] },
-    { path: 'contacto', component: ContactoComponent },
-    { path: 'usuario', component: UsuarioComponent },
-    { path: 'administrador', component: AdministradorComponent, canActivate: [ProductGuardService], data: { expectedRole: ['admin'] } },
-    { path: 'subrubros', component: SubrubrosComponent },
+    { path: 'contact', component: ContactComponent },
+    { path: 'user', component: UserComponent },
+    { path: 'admin', component: AdminComponent, canActivate: [ProductGuardService], data: { expectedRole: ['admin'] } },
+    { path: 'categories', component: CategoryComponent },
+    { path: 'subcategories', component: SubcategoryComponent },
     { path: 'ventamayorista', component: VentaMayoristaComponent, canActivate: [ProductGuardService], data: { expectedRole: ['admin', 'user'] } },
     { path: '**', redirectTo: '' , pathMatch: 'full'}
   ]
@@ -36,14 +38,15 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents = [  HomeComponent,
-                                    ProductosComponent,
-                                    QuienesComponent,
-                                    SubrubrosComponent,
-                                    UsuarioComponent,
+                                    ProductComponent,
+                                    AboutusComponent,
+                                    CategoryComponent,
+                                    SubcategoryComponent,
+                                    UserComponent,
                                     VentaMayoristaLoginComponent,
                                     VentaMayoristaSignUpComponent,
                                     VentaMayoristaComponent,
-                                    AdministradorComponent,
-                                    ContactoComponent,
+                                    AdminComponent,
+                                    ContactComponent,
                                     ProductGuardService
                                 ]; 

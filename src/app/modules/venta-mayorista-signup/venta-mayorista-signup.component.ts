@@ -2,7 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario';
+import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2'
@@ -17,7 +17,7 @@ export class VentaMayoristaSignUpComponent implements OnInit {
   formularioSignUp!: FormGroup;
   isRegistered: boolean = false;
   isRegisteredFail: boolean = false;
-  nuevoUsuario!: Usuario;
+  newUser!: User;
   
   // name: String = "";
   // lastname: String = "";
@@ -43,7 +43,7 @@ export class VentaMayoristaSignUpComponent implements OnInit {
   ngOnInit(): void {
     this.formularioSignUp = this.formbuilder.group({
       name: new FormControl ('', [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl ('', [Validators.required, Validators.minLength(3)]),
+      lastname: new FormControl ('', [Validators.required, Validators.minLength(3)]),
       dni: new FormControl ('', [Validators.required, Validators.minLength(8), Validators.maxLength(11)]),
       business: new FormControl ('', [Validators.required]),
       username: new FormControl ('', [Validators.required]),
@@ -54,10 +54,10 @@ export class VentaMayoristaSignUpComponent implements OnInit {
   }
 
   onRegister(){
-    var user = new Usuario();
+    var user = new User();
 
     user.name = this.formularioSignUp.value.name;
-    user.lastName = this.formularioSignUp.value.lastName;
+    user.lastname = this.formularioSignUp.value.lastname;
     user.dni = this.formularioSignUp.value.dni;
     user.business = this.formularioSignUp.value.business;
     user.username = this.formularioSignUp.value.username;

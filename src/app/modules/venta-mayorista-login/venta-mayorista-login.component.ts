@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioLogin } from 'src/app/models/usuariologin';
+import { UserLogin } from 'src/app/models/userlogin';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
@@ -16,7 +16,7 @@ export class VentaMayoristaLoginComponent implements OnInit {
   formularioLogin!: FormGroup;
   //isLogged: boolean = false;
   //isLoginFail: boolean = false;
-  usuarioLogin!: UsuarioLogin;
+  userLogin!: UserLogin;
   username: string = "";
   password: string = "";
   //roles: string[] = [];
@@ -39,11 +39,11 @@ export class VentaMayoristaLoginComponent implements OnInit {
   }
 
   onLogin(){
-    this.usuarioLogin = new UsuarioLogin(
+    this.userLogin = new UserLogin(
       this.formularioLogin.value.username, 
       this.formularioLogin.value.password);
 
-    this.authService.login(this.usuarioLogin).subscribe(
+    this.authService.login(this.userLogin).subscribe(
       data => {
         //this.isLogged = true;
         //this.isLoginFail = false;

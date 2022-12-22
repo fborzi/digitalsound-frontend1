@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtDTO } from '../models/jwtdto';
-import { Usuario } from '../models/usuario';
-import { UsuarioLogin } from '../models/usuariologin';
+import { User } from '../models/user';
+import { UserLogin } from '../models/userlogin';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,16 @@ import { UsuarioLogin } from '../models/usuariologin';
 export class AuthenticationService {
 
   authURL = environment.authURL;
+  mainURL = environment.mainURL;
 
   constructor(private httpClient: HttpClient) { }
 
-  public register(usuario: Usuario): Observable<any> {
-    return this.httpClient.post<any>(this.authURL + '/new', usuario);
+  public register(user: User): Observable<any> {
+    return this.httpClient.post<any>(this.mainURL + this.authURL + '/new', user);
   }
 
-  public login(usuarioLogin: UsuarioLogin): Observable<JwtDTO> {
-    return this.httpClient.post<JwtDTO>(this.authURL + '/login', usuarioLogin);
+  public login(userLogin: UserLogin): Observable<JwtDTO> {
+    return this.httpClient.post<JwtDTO>(this.mainURL + this.authURL + '/login', userLogin);
   }
 
 }
