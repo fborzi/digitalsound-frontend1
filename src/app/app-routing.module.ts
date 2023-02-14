@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './modules/admin/admin.component';
@@ -14,11 +14,13 @@ import { VentaMayoristaSignUpComponent } from './modules/venta-mayorista-signup/
 import { VentaMayoristaComponent } from './modules/venta-mayorista/venta-mayorista.component';
 import { LoginGuard } from './services/guards/login.guard';
 import { ProductGuardService } from './services/guards/product-guard.service';
+import { FilteredProductComponent } from './modules/product/filtered-product/filtered-product.component';
 
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'products', component: ProductComponent },
+    { path: 'filteredProducts', component: FilteredProductComponent },
     { path: 'aboutus', component: AboutusComponent },
     { path: 'ventamayoristasignup', component: VentaMayoristaSignUpComponent, canActivate: [LoginGuard] },
     { path: 'ventamayoristalogin', component: VentaMayoristaLoginComponent, canActivate: [LoginGuard] },
@@ -39,6 +41,7 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents = [  HomeComponent,
                                     ProductComponent,
+                                    FilteredProductComponent,
                                     AboutusComponent,
                                     CategoryComponent,
                                     SubcategoryComponent,

@@ -56,13 +56,12 @@
   <!-- Fila 1 -->
   <div class="row">
     <div class="col-lg-4">
-      <a> <!--  href="../proyectofinal/almacenamiento.php">-->
+      <a routerLink="/filteredProducts" (click)="getAlmacenamiento()">
         <img src="/assets/images/1almacenamiento.png" alt="alt" height="250">
       </a>
       <div class="container card">
         <div class="d-flex card-body justify-content-center">
           <h2 id="rubros">Almacenamiento</h2>
-          <button (onClick)="getAlmacenamiento()">Almacenamiento</button>
         </div>
       </div>
     </div><!-- /.col-lg-4 -->

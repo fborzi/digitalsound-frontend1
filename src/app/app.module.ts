@@ -22,6 +22,7 @@ import { VentaMayoristaComponent } from './modules/venta-mayorista/venta-mayoris
 import { NavbarComponent } from './modules/navbar/navbar.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { FilteredProductComponent } from './modules/product/filtered-product/filtered-product.component';
 
 
 
@@ -40,7 +41,8 @@ import { CommonModule } from '@angular/common';
     SubcategoryComponent,
     VentaMayoristaComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    FilteredProductComponent
   ],
   imports: [
     BrowserModule,
